@@ -1,21 +1,27 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
+import Navs from './components/Navs';
+import Home from './Pages/Home';
+import Starred from './Pages/Starred';
 
 function App() {
   return (
+   <div>
+    <Navs></Navs>
    <Switch>
      <Route exact  path = "/">
-       This is home page 
+       <Home></Home>
      </Route>
 
      <Route exact  path = "/starred">
-       This is contact page 
+       <Starred></Starred> 
      </Route>
 
     <Route>
       Page Not Found
     </Route>
    </Switch>
+   </div>
   );
 }
 
