@@ -2,6 +2,7 @@ import React from 'react'
 import Navs from './Navs'
 import Title from './Title'
 const MainPageLayout = (props) => {
+  console.log("main page layout rendered")
   return (
     <div>
        <div>

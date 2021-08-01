@@ -5,8 +5,11 @@ import Home from './Pages/Home';
 import Starred from './Pages/Starred';
 
 function App() {
-  return (
+
   
+  return (
+   <>
+   
    <Switch>
      <Route exact  path = "/">
        <Home></Home>
@@ -20,7 +23,7 @@ function App() {
       Page Not Found
     </Route>
    </Switch>
-  
+   </>
   );
 }
 
