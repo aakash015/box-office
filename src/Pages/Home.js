@@ -1,6 +1,9 @@
 import React,{useState} from 'react'
+import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout'
+import ShowGrid from '../components/show/ShowGrid';
 import { apiGet } from '../misc/config';
+
 
 const Home = () => {
 
@@ -19,8 +22,11 @@ const Home = () => {
 
   function onSearch()
   {
+    // console.log(searchOption);
+    // console.log(input);
     apiGet(`/search/${searchOption}?q=${input}`).then((response)=>{
      
+       
       setResults(response);
     })
 
@@ -44,12 +50,7 @@ const Home = () => {
           return ( 
              <div>
                {
-                results[0].show?( results.map((elements)=>{
-                  return <div key = {elements.show.id}>{elements.show.name}</div>     
-               }) ) :(
-               results.map((elements)=>{
-                return <div key = {elements.person.id}>{elements.person.name}</div>     
-             }))
+                results[0].show?<ShowGrid data = {results} /> :<ActorGrid  data  = {results}/>
 
               }
              </div>
