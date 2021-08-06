@@ -1,13 +1,41 @@
-import React,{useState,useEffect} from 'react'
+import React,{useReducer,useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import { apiGet } from '../misc/config';
 function Shows() {
   
   const params = useParams(); //this oarams will contain the id of the params 
   const {id} = params;
-  const [show,setShow] = useState(null);
-  const [isLoading,setIsLoading] = useState(true);
-  const [error,setError] = useState(null);
+ 
+
+  const reducer = (prevState, action)=>{
+     
+    switch(action.type)
+    {
+      
+      case 'FETCH_SUCCESS' : {
+        return {...prevState,isLoading:false,error:null,show:action.show}
+      }
+
+      case 'FETCH_FAILED' : {
+        return {...prevState,isLoading:false,error:action.error}
+      }
+
+      default : return prevState;
+    }
+  }
+
+  const initialState = {
+    show:null,
+    isLoading : false,
+    error : null
+  }
+  const [state,dispatch] = useReducer(reducer,initialState);
+
+    const {show,isLoading,error} =state;
+
+  // const [show,setShow] = useState(null);
+  // const [isLoading,setIsLoading] = useState(true);
+  // const [error,setError] = useState(null);
 
    console.log("show rerendered");
 
@@ -20,15 +48,13 @@ function Shows() {
 
      
       if(isMounted){
-        setShow(result)
-        setIsLoading(false);
+       dispatch({type:'FETCH_SUCCESS',show:result})
       }
       
     }).catch((err)=>{
       if(isMounted)
       {
-        setError(err);
-        setIsLoading(false);
+        dispatch({type:'FETCH_FAILED',error:err.message})
       }
 
     })
