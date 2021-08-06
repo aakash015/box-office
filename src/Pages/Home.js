@@ -13,11 +13,14 @@ const Home = () => {
   const [results,setResults] = useState(null);
   const [searchOption,setSearchOption] = useState('shows');
 
+
+
+
   function onInputChange(event){
      
      
      setInput(event.target.value);
-
+   
   }
 
   function onSearch()
