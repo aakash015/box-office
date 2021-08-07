@@ -1,5 +1,9 @@
 import React,{useReducer,useEffect} from 'react'
 import {useParams} from 'react-router-dom'
+import Cast from '../components/show/Cast';
+import Details from '../components/show/Details';
+import Seasons from '../components/show/Seasons';
+import ShowMainData from '../components/show/ShowMainData';
 import { apiGet } from '../misc/config';
 function Shows() {
   
@@ -26,10 +30,13 @@ function Shows() {
 
   const initialState = {
     show:null,
-    isLoading : false,
+    isLoading : true,
     error : null
   }
   const [state,dispatch] = useReducer(reducer,initialState);
+
+   console.log("this is state");
+   console.log(state);
 
     const {show,isLoading,error} =state;
 
@@ -37,7 +44,7 @@ function Shows() {
   // const [isLoading,setIsLoading] = useState(true);
   // const [error,setError] = useState(null);
 
-   console.log("show rerendered");
+  //  console.log("show rerendered");
 
   useEffect(()=>{
   
@@ -47,8 +54,13 @@ function Shows() {
     apiGet(`/shows/${id}?embed[]=seasons&embed[]=cast`).then((result)=>{
 
      
+
       if(isMounted){
-       dispatch({type:'FETCH_SUCCESS',show:result})
+      
+        
+          dispatch({type:'FETCH_SUCCESS',show:result})
+        
+       
       }
       
     }).catch((err)=>{
@@ -70,6 +82,7 @@ function Shows() {
     console.log("isLoading rerendered")
     return <div>Data is being loaded</div>
    }
+
     if(error)
     { 
      console.log("Error in data loading rendered");
@@ -79,10 +92,31 @@ function Shows() {
     return (
       
      <div>
-       {
-         console.log("this is show rendered")
-       }
-       this is show
+      <ShowMainData image = {show.image} name = {show.name} 
+        rating = {show.rating} 
+        summary = {show.summary} 
+         tags = {show.genres}  
+        />
+
+      <div>
+        <h2>Details</h2>
+        <Details  
+          status = {show.status} 
+           network = {show.network}
+           premiered = {show.premiered}
+          />
+      </div>
+
+      <div>
+        <h2>Seasons</h2>
+        <Seasons seasons = {show._embedded.seasons}/>
+      </div>
+
+      <div>
+        <h2>Cast</h2>
+        <Cast cast = {show._embedded.cast} />
+      </div>
+
      </div>
     )
 }
