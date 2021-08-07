@@ -5,6 +5,7 @@ import Details from '../components/show/Details';
 import Seasons from '../components/show/Seasons';
 import ShowMainData from '../components/show/ShowMainData';
 import { apiGet } from '../misc/config';
+import { InfoBlock, ShowPageWrapper } from './Show.styled';
 function Shows() {
   
   const params = useParams(); //this oarams will contain the id of the params 
@@ -91,33 +92,33 @@ function Shows() {
 
     return (
       
-     <div>
+     <ShowPageWrapper>
       <ShowMainData image = {show.image} name = {show.name} 
         rating = {show.rating} 
         summary = {show.summary} 
          tags = {show.genres}  
         />
 
-      <div>
+      <InfoBlock>
         <h2>Details</h2>
         <Details  
           status = {show.status} 
            network = {show.network}
            premiered = {show.premiered}
           />
-      </div>
+      </InfoBlock>
 
-      <div>
+      <InfoBlock>
         <h2>Seasons</h2>
         <Seasons seasons = {show._embedded.seasons}/>
-      </div>
+      </InfoBlock>
 
-      <div>
+      <InfoBlock>
         <h2>Cast</h2>
         <Cast cast = {show._embedded.cast} />
-      </div>
+      </InfoBlock>
 
-     </div>
+     </ShowPageWrapper>
     )
 }
 
