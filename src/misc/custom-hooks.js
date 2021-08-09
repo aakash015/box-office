@@ -34,7 +34,7 @@ function usePersistedReducer(reducer,initialState,key){
   });  //what this function return is set as initialState 
 
    useEffect(()=>{
-      console.log("useEffect called");
+      console.log("useEffectrrr called");
     localStorage.setItem(key,JSON.stringify(state))
    },[state,key])
 
