@@ -43,7 +43,11 @@ export const Star = styled.div`
   display: inline-block;
   width: 18px;
   height: 18px;
-  background-color: #ffc806;
+  /* background-color: #ffc806; */
+  background-color: ${(props) =>{
+    console.log(props)
+    return props.active?' #ffc806;' : '#ddd';
+  }};
   clip-path: polygon(
     50% 0%,
     61% 35%,
