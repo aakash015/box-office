@@ -34,6 +34,7 @@ function Shows() {
     isLoading : true,
     error : null
   }
+
   const [state,dispatch] = useReducer(reducer,initialState);
 
    console.log("this is state");
@@ -49,7 +50,7 @@ function Shows() {
 
   useEffect(()=>{
   
-
+  console.log("useEffectrun");
     let isMounted = true;
 
     apiGet(`/shows/${id}?embed[]=seasons&embed[]=cast`).then((result)=>{
@@ -58,10 +59,10 @@ function Shows() {
 
       if(isMounted){
       
-        
+        setTimeout(()=>{
           dispatch({type:'FETCH_SUCCESS',show:result})
-        
-       
+        },2000);
+          
       }
       
     }).catch((err)=>{
