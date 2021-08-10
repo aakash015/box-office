@@ -78,7 +78,7 @@ const Home = () => {
   return (
     
     <div>
-    langadbhangad
+  
       <MainPageLayout>
       <input type = "text"
        onKeyDown = {onKeyDown} 

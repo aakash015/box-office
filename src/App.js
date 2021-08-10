@@ -4,13 +4,21 @@ import Navs from './components/Navs';
 import Home from './Pages/Home';
 import Shows from './Pages/Shows';
 import Starred from './Pages/Starred';
+import {ThemeProvider} from 'styled-components'
 
+const theme = {
+  mainColors: {
+    blue: '#2400ff',
+    gray: '#c6c6c6',
+    dark: '#353535',
+  },
+};
 
 function App() {
 
   
   return (
-   <>
+   <ThemeProvider theme = {theme}>
    
    <Switch>
      <Route exact  path = "/">
@@ -31,7 +39,7 @@ function App() {
       Page Not Found
     </Route>
    </Switch>
-   </>
+   </ThemeProvider>
   );
 }
 
